@@ -1,0 +1,27 @@
+// List of mandatory extensions for users of this workspace.
+
+// See http://go.microsoft.com/fwlink/?LinkId=827846 to learn about workspace recommendations.
+// Extension identifier format: ${publisher}.${name}. Example: vscode.csharp
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "Vue.volar", // Vue 3 Language Features
+    "Vue.vscode-typescript-vue-plugin", // Typescript Vue Plugin (Volar)
+    "MisterJ.vue-volar-extention-pack", // Vue Volar extension pack (includes many extensions)
+    "formulahendry.auto-close-tag",
+    "PKief.material-icon-theme",
+    "steoates.autoimport",
+    "formulahendry.auto-rename-tag",
+    "mgmcdermott.vscode-language-babel",
+    "mikestead.dotenv",
+    "mhutchie.git-graph",
+    "eamodio.gitlens",
+    "christian-kohler.npm-intellisense",
+    "christian-kohler.path-intellisense",
+    "Syler.sass-indented",
+    "sibiraj-s.vscode-scss-formatter",
+    "wayou.vscode-todo-highlight",
+    "bejjang2.vue-jsdoc"
+  ]
+}
