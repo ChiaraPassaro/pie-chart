@@ -6,8 +6,10 @@ We will create a simple Vue component that represents a Stacked Pie Chart.
 To create the Pie Chart, we use one circle for each data and a `stroke-dasharray` to color the desired slice.
 Every slice will be animated with a rotation, and, on hover, a tooltip with the relative info will be visualized.
 
-![](./screens/PieChart-screen-record.mp4)
+This is the result: 
+[Screen recording](./screens/PieChart-screen-record.mp4)
 
+----------
 ### Previous knowledge
 - HTML 
 	- svg
