@@ -22,15 +22,11 @@
 			color: "hsl(200 60% 50%)",
 		},
 	]
-
-	onMounted(() => {
-		setTimeout(() => (loading.value = true), 200)
-	})
 </script>
 <template>
 	<main>
 		<header><h2>Pie Chart</h2></header>
-		<PieChart v-if="loading && data?.length" :data="data" />
+		<PieChart v-if="data?.length" :data="data" />
 	</main>
 </template>
 
