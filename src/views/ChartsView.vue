@@ -1,8 +1,5 @@
 <script setup lang="ts">
 	import PieChart from "@/components/PieChart.vue"
-	import { onMounted, ref } from "vue"
-
-	const loading = ref(false)
 
 	//mockup data
 	const data = [

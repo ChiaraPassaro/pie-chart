@@ -34,15 +34,15 @@
 			return accumulator + element.quantity
 		}, 0)
 	)
-	//and a method to calculate the single percentage from this total
+	//we calculate the single percentage in relation to the circumference
 	const getSinglePercentage = (quantity: number) => (quantity * 100) / totalPercentage.value
 
-	//we calculate the single percentage respect the circumference
+	//we calculate the single percentage in relation to the circumference
 	const getSlice = (quantity: number) => {
 		return (circumference * getSinglePercentage(quantity)) / 100
 	}
 
-	//Every element is rotated starting from the position of the previous, we have a circle, so we need to calculate the percentage respect 360deg.
+	//Every element is rotated starting from the position of the previous, we have a circle, so we need to calculate the percentage in relation to 360deg.
 	const getRotate = (index: number) => {
 		let angle = 0
 		let counter = 0
@@ -60,20 +60,20 @@
 	const getDelay = (index: number) => `${0.5 + index / 3}s`
 
 	//Mask and circle need an id to be bound to each other.
-	const getId = (label: string) => label.replace(" ", "-")
+	const getId = (label: string, index: number) => `${label.replace(" ", "-")}-${index}`
 </script>
 <template>
 	<div class="data__pie">
 		<!--we set the viewbox-->
 		<svg :viewBox="`0 0 ${viewbox} ${viewbox}`">
 			<!--ve use a template for the v-for-->
-			<template v-for="(datum, i) in data" :key="`${datum.label}-${i}`">
+			<template v-for="(datum, idx) in data" :key="`${datum.label}-${idx}`">
 				<!-- for each data we have a mask -->
 				<!-- we need an id to link the mask -->
-				<mask :id="getId(datum.label)">
+				<mask :id="getId(datum.label, idx)">
 					<!-- each mask has a different radius. We start from the lowest -->
 					<!-- and we set the center of the circle at the center of the viewbox -->
-					<circle :r="minRadiusMask + i" :cx="radius" :cy="radius" fill="white" />
+					<circle :r="minRadiusMask + idx" :cx="radius" :cy="radius" fill="white" />
 				</mask>
 
 				<!-- for each data we have a group -->
@@ -93,17 +93,17 @@
 						:r="radius"
 						:cx="radius"
 						:cy="radius"
-						:mask="`url(#${getId(datum.label)})`"
+						:mask="`url(#${getId(datum.label, idx)})`"
 						class="data__pie-slice"
 						:style="`
-							--rotate: ${getRotate(i)}deg; 
+							--rotate: ${getRotate(idx)}deg; 
 							--color: ${datum.color}; 
-							--delay: ${getDelay(i)};
+							--delay: ${getDelay(idx)};
 							stroke-dasharray:${getSlice(datum.quantity)}px, ${circumference}px; 
 							stroke-width: ${strokeWidth};
 						`"
 					>
-						<!-- The title is for the accessibility and for the tooltip -->
+						<!-- The title is for accessibility and the tooltip -->
 						<title>{{ datum.label }}: {{ datum.quantity }}%</title>
 					</circle>
 				</g>
