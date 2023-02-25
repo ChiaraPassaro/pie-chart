@@ -11,7 +11,7 @@
 		},
 		animationDuration: {
 			type: Number,
-			default: 1.4,
+			default: 1,
 		},
 	})
 
@@ -139,8 +139,10 @@
 		animation-fill-mode: forwards;
 		/* The v-bind method is useful to populate the CSS with props and computed that do not need other parameters. */
 		animation-duration: v-bind(duration);
-		/*Each circle has its own delay*/
+		/*Each circle has its own delay and color*/
 		animation-delay: var(--delay);
+		stroke: var(--color);
+		opacity: 0;
 	}
 	.data__pie circle:hover {
 		filter: brightness(0.8);
@@ -148,16 +150,12 @@
 
 	@keyframes rotate {
 		0% {
-			stroke: hsla(0 0 0 0);
+			opacity: 0;
 			transform: rotate(-180deg);
 		}
-		10% {
-			stroke: hsla(0 0 0 0.5);
-			transform: rotate(-90deg);
-		}
 		100% {
-			/*Each circle has its own color and rotation*/
-			stroke: var(--color);
+			opacity: 1;
+			/*Each circle has its own rotation*/
 			transform: rotate(var(--rotate));
 		}
 	}
