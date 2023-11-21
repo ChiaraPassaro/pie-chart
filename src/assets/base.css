@@ -1,5 +1,6 @@
 :root {
-	--appBgColor: hsl(280, 5%, 11%);
+	--appBgColor: hsl(257, 49%, 18%);
+	--appBgColor2: hsla(257, 49%, 18%, 0.8);
 }
 
 *,
