@@ -6,7 +6,7 @@
 	//we need some data to represent
 	const props = defineProps({
 		data: {
-			type: Object as PropType<PieData[]>, //we use Typescript to describe the array
+			type: Object as PropType<PieData[]>,
 			required: true,
 		},
 		animationDuration: {
@@ -61,16 +61,27 @@
 
 	//Mask and circle need an id to be bound to each other.
 	const getId = (label: string, index: number) => `${label.replace(" ", "-")}-${index}`
+
+	const colorBrightness = (color: string) => {
+		const colorSplit = color.split("%")
+		const lightness = parseInt(colorSplit[1]) > 30 ? parseInt(colorSplit[1]) - 30 : parseInt(colorSplit[1]) + 20
+
+		return `${colorSplit[0]}% ${lightness}% ${colorSplit[2]}`
+	}
 </script>
 <template>
 	<div class="data__pie">
 		<!--we set the viewbox-->
 		<svg :viewBox="`0 0 ${viewbox} ${viewbox}`">
 			<!--ve use a template for the v-for-->
-			<template v-for="(datum, idx) in data" :key="`${datum.label}-${idx}`">
+			<template v-for="({ label, quantity, color }, idx) in data" :key="`${label}-${idx}`">
+				<radialGradient :id="`gradient-${getId(label, idx)}`">
+					<stop offset="0%" :stop-color="colorBrightness(color)" />
+					<stop offset="100%" :stop-color="color" />
+				</radialGradient>
 				<!-- for each data we have a mask -->
 				<!-- we need an id to link the mask -->
-				<mask :id="getId(datum.label, idx)">
+				<mask :id="getId(label, idx)">
 					<!-- each mask has a different radius. We start from the lowest -->
 					<!-- and we set the center of the circle at the center of the viewbox -->
 					<circle :r="minRadiusMask + idx" :cx="radius" :cy="radius" fill="white" />
@@ -93,18 +104,18 @@
 						:r="radius"
 						:cx="radius"
 						:cy="radius"
-						:mask="`url(#${getId(datum.label, idx)})`"
+						:mask="`url(#${getId(label, idx)})`"
 						class="data__pie-slice"
 						:style="`
 							--rotate: ${getRotate(idx)}deg; 
-							--color: ${datum.color}; 
+							--color: url(#gradient-${getId(label, idx)}); 
 							--delay: ${getDelay(idx)};
-							stroke-dasharray:${getSlice(datum.quantity)}px, ${circumference}px; 
+							stroke-dasharray:${getSlice(quantity)}px, ${circumference}px; 
 							stroke-width: ${strokeWidth};
 						`"
 					>
 						<!-- The title is for accessibility and the tooltip -->
-						<title>{{ datum.label }}: {{ datum.quantity }}%</title>
+						<title>{{ label }}: {{ quantity }}%</title>
 					</circle>
 				</g>
 			</template>
