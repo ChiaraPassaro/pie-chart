@@ -2,7 +2,10 @@
 
 #app {
 	height: 100vh;
-	background-color: var(--appBgColor);
+	background-image: radial-gradient(
+		var(--appBgColor2) 0%,
+		var(--appBgColor) 100%
+	);
 }
 
 ul {
