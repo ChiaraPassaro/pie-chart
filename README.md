@@ -321,8 +321,8 @@ Now that we have seen the css and the template, we can see the logic that we use
 	//It is possible that the sum of quantities is bigger than 100%
 	//We use a computed to calculate the total quantity
 	const totalPercentage = computed(() =>
-		props.data.reduce((accumulator, element) => {
-			return accumulator + element.quantity
+		props.data.reduce((totalQuantity, { quantity }) => {
+			return totalQuantity + quantity
 		}, 0)
 	)
 	//and a method to calculate the single percentage from this total
