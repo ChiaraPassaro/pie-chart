@@ -364,6 +364,5 @@ Or add text inside the slice?
 
 That's it! 😎
 
-I hope you have enjoyed the exercise.
 
 
