@@ -1,8 +1,10 @@
 <script setup lang="ts">
+	import type { PieData } from "@/types/chart"
+
 	import PieChart from "@/components/PieChart.vue"
 
 	//mockup data
-	const data = [
+	const data: PieData[] = [
 		{
 			label: "Label 1",
 			quantity: 20,
